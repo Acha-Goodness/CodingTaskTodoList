@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./todo.css";
 import { MdDeleteForever } from "react-icons/md";
 
-const todo = () => {
+const Todo = () => {
+
+  const [ todo, setTodo ] = useState({
+    todoItem:""
+  });
+
   const todoItems = [
     {
         id:1,
@@ -16,7 +21,18 @@ const todo = () => {
         id:3,
         item:"Play Video Game"
     }
-  ]
+  ];
+
+  const handleOnchange = (e) => {
+    setTodo({
+        todoItem: e.target.value
+    })
+  }
+
+  const submitTodoItem = (e) => {
+    e.preventDefault();
+    console.log(todo.todoItem);
+  }
 
   const deleteTodo = (id) => {
     const newTodo = todoItems.filter(item => item.id !== id);
@@ -27,9 +43,9 @@ const todo = () => {
         <div className='todo-wrap'>
             <div className='todo-container'>
                 <h1>TODO LIST</h1>
-                <form>
+                <form onSubmit={submitTodoItem}>
                     <div className="form-group">
-                        <input type="text" placeholder="Enter new todo list"/>
+                        <input type="text" name="todoItem" value={todo.todoItem} placeholder="Enter new todo list" onChange={(e) => handleOnchange(e)}/>
                         <button type="submit">Add</button>
                     </div>
                 </form>
@@ -51,4 +67,4 @@ const todo = () => {
   )
 }
 
-export default todo
+export default Todo;
