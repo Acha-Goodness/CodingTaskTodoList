@@ -1,5 +1,6 @@
 import React from 'react';
 import "./todo.css";
+import { MdDeleteForever } from "react-icons/md";
 
 const todo = () => {
   const todoItems = [
@@ -16,6 +17,12 @@ const todo = () => {
         item:"Play Video Game"
     }
   ]
+
+  const deleteTodo = (id) => {
+    const newTodo = todoItems.filter(item => item.id !== id);
+    console.log(newTodo);
+  }
+
   return (
         <div className='todo-wrap'>
             <div className='todo-container'>
@@ -29,10 +36,12 @@ const todo = () => {
                 <div className="todo-item-container">
                     {
                         todoItems.map(item => {
-                             return <div className='todo-item'>
-                                        <div>
-                                            
+                             return <div key={item.id} className='todo-item'>
+                                        <div className="item-text">
+                                            <p>{item.id}</p>
+                                            <p>{item.item}</p>
                                         </div>
+                                        <MdDeleteForever className="delete" onClick={() => deleteTodo(item.id)} />
                                     </div>
                         })
                     }
