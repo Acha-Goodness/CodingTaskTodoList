@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import "./todo.css";
+import { useGetAllTodoQuery, useCreateTodoMutation, useDeleteTodoMutation } from '../Api/todoApiSlice';
 import { MdDeleteForever } from "react-icons/md";
 
 const Todo = () => {
 
-  const [ todo, setTodo ] = useState({
-    todoItem:""
-  });
+  const [ todo, setTodo ] = useState({ todoItem:"" });
 
   const todoItems = [
     {
@@ -23,6 +22,10 @@ const Todo = () => {
     }
   ];
 
+  const { data: todos, isLoading, isSuccess } = useGetAllTodoQuery();
+  const [ createTodo ] = useCreateTodoMutation();
+  const [ deleteTodo ] = useDeleteTodoMutation();
+
   const handleOnchange = (e) => {
     setTodo({
         todoItem: e.target.value
@@ -34,7 +37,7 @@ const Todo = () => {
     console.log(todo.todoItem);
   }
 
-  const deleteTodo = (id) => {
+  const delTodo = (id) => {
     const newTodo = todoItems.filter(item => item.id !== id);
     console.log(newTodo);
   }
@@ -57,7 +60,7 @@ const Todo = () => {
                                             <p>{item.id}</p>
                                             <p>{item.item}</p>
                                         </div>
-                                        <MdDeleteForever className="delete" onClick={() => deleteTodo(item.id)} />
+                                        <MdDeleteForever className="delete" onClick={() => delTodo(item.id)} />
                                     </div>
                         })
                     }
