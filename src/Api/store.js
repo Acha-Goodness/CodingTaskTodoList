@@ -7,10 +7,10 @@ export const store = configureStore({
         [todoSlice.reducerPath] : todoSlice.reducer
     },
 
-    middleware: ( getDefaultMiddleware ) => {
+    middleware: ( getDefaultMiddleware ) => 
         getDefaultMiddleware({ immutableCheck: false, serializableCheck: false,})
-        .concat([todoSlice.middleware])
-    }
+        .concat(todoSlice.middleware)
+    
 })
 
 setupListeners(store.dispatch);
