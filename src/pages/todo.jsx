@@ -30,8 +30,12 @@ const Todo = () => {
   }
 
   const delTodo = (id) => {
-    // const newTodo = todoItems.filter(item => item.id !== id);
-    // console.log(newTodo);
+    deleteTodo(id)
+    .then(res => {
+        console.log(res);
+    }).catch(err => {
+        console.log(err)
+    });
   }
 
   return (
@@ -52,7 +56,7 @@ const Todo = () => {
                                             <p>{idx += 1}</p>
                                             <p>{item.description}</p>
                                         </div>
-                                        <MdDeleteForever className="delete" onClick={() => delTodo(item.id)} />
+                                        <MdDeleteForever className="delete" onClick={() => delTodo(item._id)} />
                                     </div>
                         })
                     }

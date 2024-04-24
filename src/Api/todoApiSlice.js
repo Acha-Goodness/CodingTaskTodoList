@@ -28,11 +28,13 @@ export const todoSlice = createApi({
         }),
 
         deleteTodo: builder.mutation({
-            query: ({ id }) => ({
-                url:`/deleteTodo/${id}`,
-                method: "DELETE",
-                body: id
-            }),
+            query: (id) => {
+            return {
+                    url:`/deleteTodo/${id}`,
+                    method: "DELETE",
+                    body: id
+                }
+            },
             invalidatesTags: ["Todos"],
         }),
 
