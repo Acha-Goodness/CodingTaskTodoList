@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./todo.css";
+import { Commet } from "react-loading-indicators";
 import { useGetAllTodoQuery, useCreateTodoMutation, useDeleteTodoMutation } from '../Api/todoApiSlice';
 import { MdDeleteForever } from "react-icons/md";
 
@@ -7,7 +8,7 @@ const Todo = () => {
 
   const [ todo, setTodo ] = useState({ todoItem:"" });
 
-  const { data, isLoading, isSuccess } = useGetAllTodoQuery();
+  const { data, isLoading, isSuccess, isError, error } = useGetAllTodoQuery();
   
   const [ createTodo ] = useCreateTodoMutation();
   const [ deleteTodo ] = useDeleteTodoMutation();
@@ -49,8 +50,9 @@ const Todo = () => {
                     </div>
                 </form>
                 <div className="todo-item-container">
+                    { data?.data.todos.length === 0 && <p className='no-task'>You do not have an existing Task <b>ADD A TASK!</b></p>}
                     {
-                        isSuccess && data.data.todos.map((item, idx) => {
+                       isSuccess && data.data.todos.map((item, idx) => {
                              return <div key={idx} className='todo-item'>
                                         <div className="item-text">
                                             <p>{idx += 1}</p>
@@ -60,6 +62,8 @@ const Todo = () => {
                                     </div>
                         })
                     }
+                    {isLoading && <div className="loader"><Commet color="blue" size="small"/></div>}
+                    {isError && <h2 className='err-msg'>An error occured</h2>}
                 </div>
             </div>
         </div>

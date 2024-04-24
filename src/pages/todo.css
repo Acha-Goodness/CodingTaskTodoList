@@ -9,6 +9,7 @@
     margin:0 auto;
     height: 90vh;
     padding:0.8%;
+    overflow-y: scroll;
 }
 .todo-container h1{
     text-align: center;
@@ -16,7 +17,7 @@
     padding-bottom: 1%;
 }
 .todo-container form{
-    width: 75%;
+    width: 80%;
     margin: 0 auto;
 }
 .form-group input{
@@ -41,7 +42,7 @@
     color:white;
 }
 .todo-item-container{
-    width:75%;
+    width:80%;
     margin: 3% auto 0px auto;
 }
 .todo-item{
@@ -64,4 +65,19 @@
 .delete{
     font-size: 30px;
     color:red;
+    cursor: pointer;
+}
+.no-task{
+    color: blue;
+    text-align: center;
+    padding-top:30%;
+}
+.err-msg{
+    color: rgb(255, 0, 0);
+    text-align: center;
+    padding-top:30%;
+}
+.loader{
+    text-align: center;
+    padding-top:30%;
 }
