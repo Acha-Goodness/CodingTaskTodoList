@@ -8,7 +8,7 @@ const Todo = () => {
 
   const [ todo, setTodo ] = useState({ todoItem:"" });
 
-  const { data, isLoading, isSuccess, isError, error } = useGetAllTodoQuery();
+  const { data, isLoading, isSuccess, isError } = useGetAllTodoQuery();
   
   const [ createTodo ] = useCreateTodoMutation();
   const [ deleteTodo ] = useDeleteTodoMutation();
