@@ -6,7 +6,6 @@ import { MdDeleteForever } from "react-icons/md";
 const Todo = () => {
 
   const [ todo, setTodo ] = useState({ todoItem:"" });
-  const [ errMsg, setErrMsg ] = useState();
 
   const { data, isLoading, isSuccess } = useGetAllTodoQuery();
   
@@ -16,15 +15,15 @@ const Todo = () => {
   const handleOnchange = (e) => {
     setTodo({
         todoItem: e.target.value
-    })
+    });
   }
 
   const submitTodoItem = (e) => {
     e.preventDefault();
-    if(todo.todoItem === "") return "Please enter a todo decription"
-    createTodo(todo.todoItem)
+
+    createTodo({description: todo.todoItem})
     .then(res => {
-        console.log(res)
+        setTodo({ todoItem:"" });
     }).catch(err => {
         console.log(err)
     });
@@ -41,7 +40,7 @@ const Todo = () => {
                 <h1>TODO LIST</h1>
                  <form onSubmit={submitTodoItem}>
                     <div className="form-group">
-                        <input type="text" name="todoItem" value={todo.todoItem} placeholder="Enter new todo list" onChange={(e) => handleOnchange(e)}/>
+                        <input type="text" name="todoItem" value={todo.todoItem} placeholder="Enter new todo list" onChange={(e) => handleOnchange(e)} minLength={5} required/>
                         <button type="submit">Add</button>
                     </div>
                 </form>
